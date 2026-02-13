@@ -1,30 +1,20 @@
 import tkinter as tk
 import fractions_logic  # this imports your math file
 
-def on_calculate(op):
+def on_calculate():
     try:
         num1 = int(entry_num1.get())
         denom1 = int(entry_denom1.get())
         num2 = int(entry_num2.get())
         denom2 = int(entry_denom2.get())
 
-        if op == "+":
-            result = fractions_logic.add_fractions(num1, denom1, num2, denom2)
-        elif op == "-":
-            result = fractions_logic.minus_fractions(num1, denom1, num2, denom2)
-        elif op == "X":
-            result = fractions_logic.mult_fractions(num1, denom1, num2, denom2)
-        elif op == "÷":
-            result = fractions_logic.div_fractions(num1, denom1, num2, denom2)
+        result = fractions_logic.add_fractions(num1, denom1, num2, denom2)
 
         if result is None:
             label_result.config(text="Denominator cannot be 0.")
         else:
             n, d = result
-            if n == 0 or d == 1:
-                label_result.config(text=f"Result: {n}")
-            else:
-                label_result.config(text=f"Result: {n} / {d}") 
+            label_result.config(text=f"Result: {n} / {d}") 
 
     except ValueError: #invalid input
         label_result.config(text="Please enter valid integers.")
@@ -55,13 +45,8 @@ tk.Label(frame, text="Denominator:", bg="white").grid(row=5, column=0)
 entry_denom2 = tk.Entry(frame)
 entry_denom2.grid(row=5, column=1)
 
-btn_frame = tk.Frame(frame, bg="white")
-btn_frame.grid(row=6, column=0, columnspan=4, pady=10)
-
-tk.Button(btn_frame, text="+", width=4, command=lambda: on_calculate("+")).pack(side="left", padx=6)
-tk.Button(btn_frame, text="-", width=4, command=lambda: on_calculate("-")).pack(side="left", padx=6)
-tk.Button(btn_frame, text="x", width=4, command=lambda: on_calculate("X")).pack(side="left", padx=6)
-tk.Button(btn_frame, text="÷", width=4, command=lambda: on_calculate("÷")).pack(side="left", padx=6)
+btn = tk.Button(frame, text="Add Fractions", command=on_calculate)
+btn.grid(row=6, column=0, columnspan=2, pady=10)
 
 label_result = tk.Label(frame, text="Result:", bg="white", font=("Arial", 12))
 label_result.grid(row=7, column=0, columnspan=2)
