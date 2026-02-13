@@ -23,6 +23,8 @@ def on_calculate(op):
             n, d = result
             if n == 0 or d == 1:
                 label_result.config(text=f"Result: {n}")
+            elif d == 0:
+                label_result.config(text=f"Result: Undefined")
             else:
                 label_result.config(text=f"Result: {n} / {d}") 
 
